@@ -1,176 +1,176 @@
--- Ä¿¼­ ½ÇÇà ´ÜÃàÅ° : ctrl + enter
--- ¹®¼­ ÀüÃ¼ ½ÇÇà : F5
+-- ì»¤ì„œ ì‹¤í–‰ ë‹¨ì¶•í‚¤ : ctrl + enter
+-- ë¬¸ì„œ ì „ì²´ ì‹¤í–‰ : F5
 select 1+1
 from dual;
 
--- 1. °èÁ¤ Á¢¼Ó ¸í·É¾î
--- conn °èÁ¤¸í/ºñ¹Ğ¹øÈ£;
+-- 1. ê³„ì • ì ‘ì† ëª…ë ¹ì–´
+-- conn ê³„ì •ëª…/ë¹„ë°€ë²ˆí˜¸;
 conn system/123456;
 
 -- 2. 
--- SQL Àº ´ë/¼Ò¹®ÀÚ ±¸ºĞÀÌ ¾ø´Ù.
--- ¸í·É¾î Å°¿öµå ´ë¹®ÀÚ, ½Äº°ÀÚ´Â ¼Ò¹®ÀÚ ÁÖ·Î »ç¿ëÇÑ´Ù
+-- SQL ì€ ëŒ€/ì†Œë¬¸ì êµ¬ë¶„ì´ ì—†ë‹¤.
+-- ëª…ë ¹ì–´ í‚¤ì›Œë“œ ëŒ€ë¬¸ì, ì‹ë³„ìëŠ” ì†Œë¬¸ì ì£¼ë¡œ ì‚¬ìš©í•œë‹¤
 select user_id, username
 from all_users
 -- where username = 'HR';
 
--- 3. HR °èÁ¤ »ı¼º
--- create user °èÁ¤¸í identified by ºñ¹Ğ¹øÈ£;
+-- 3. HR ê³„ì • ìƒì„±
+-- create user ê³„ì •ëª… identified by ë¹„ë°€ë²ˆí˜¸;
 create user HR identified by 123456;
 
--- 4. Å×ÀÌºí ½ºÆäÀÌ½º º¯°æ
--- HR °èÁ¤ÀÇ ±âº»Å×ÀÌºí ¿µ¿ªÀ» 'users'¿µ¿ªÀ¸·Î ÁöÁ¤
--- alter user °èÁ¤¸í default tablespace users;
+-- 4. í…Œì´ë¸” ìŠ¤í˜ì´ìŠ¤ ë³€ê²½
+-- HR ê³„ì •ì˜ ê¸°ë³¸í…Œì´ë¸” ì˜ì—­ì„ 'users'ì˜ì—­ìœ¼ë¡œ ì§€ì •
+-- alter user ê³„ì •ëª… default tablespace users;
 alter user HR default tablespace users;
 
--- 5. °èÁ¤ÀÌ »ç¿ëÇÒ ¼ö ÀÖ´Â ¿ë·® ¼³Á¤
--- HR °èÁ¤ÀÇ »ç¿ë ¿ë·®À» ¹«ÇÑ´ë·Î ÁöÁ¤
---alter user °èÁ¤¸í quota unlimited on Å×ÀÌºí½ºÆäÀÌ½º;
+-- 5. ê³„ì •ì´ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ìš©ëŸ‰ ì„¤ì •
+-- HR ê³„ì •ì˜ ì‚¬ìš© ìš©ëŸ‰ì„ ë¬´í•œëŒ€ë¡œ ì§€ì •
+--alter user ê³„ì •ëª… quota unlimited on í…Œì´ë¸”ìŠ¤í˜ì´ìŠ¤;
 alter user HR quota unlimited on users;
 
--- 6. °èÁ¤¿¡ ±ÇÇÑÀ» ºÎ¿©
--- HR °èÁ¤¿¡ connect, resource ±ÇÇÑÀ» ºÎ¿©
--- grant ±ÇÇÑ¸í1, ±ÇÇÑ¸í2 to °èÁ¤¸í;
+-- 6. ê³„ì •ì— ê¶Œí•œì„ ë¶€ì—¬
+-- HR ê³„ì •ì— connect, resource ê¶Œí•œì„ ë¶€ì—¬
+-- grant ê¶Œí•œëª…1, ê¶Œí•œëª…2 to ê³„ì •ëª…;
 grant connect, resource to HR;
 
--- 7. c##¾øÀÌ °èÁ¤ »ı¼º
+-- 7. c##ì—†ì´ ê³„ì • ìƒì„±
 alter session set '_oracle_script' = true; 
 
--- ±âº» °èÁ¤ »ı¼º
+-- ê¸°ë³¸ ê³„ì • ìƒì„±
 alter session set "_oracle_script" = true; 
 create user HR identified by 123456;
 alter user HR default tablespace users;
 alter user HR quota unlimited on users;
 grant connect, resource to HR;
 
--- °èÁ¤ »èÁ¦
--- HR °èÁ¤ »èÁ¦
--- drop user °èÁ¤¸í [cascade];
+-- ê³„ì • ì‚­ì œ
+-- HR ê³„ì • ì‚­ì œ
+-- drop user ê³„ì •ëª… [cascade];
 drop user HR [cascade];
 
--- °èÁ¤ Àá±İ ÇØÁ¦
--- alter user °èÁ¤¸í account unlock;
+-- ê³„ì • ì ê¸ˆ í•´ì œ
+-- alter user ê³„ì •ëª… account unlock;
 alter user HR account unlock;
 
--- HR »ùÇÃ ½ºÅ°¸¶(µ¥ÀÌÅÍ) °¡Á®¿À±â
+-- HR ìƒ˜í”Œ ìŠ¤í‚¤ë§ˆ(ë°ì´í„°) ê°€ì ¸ì˜¤ê¸°
 -- 1. SQL PLUS
--- 2. HR °èÁ¤ Á¢¼Ó
--- 3. ¸í·É¾î ÀÔ·Â
--- @[°æ·Î]\hr_main.sql
--- @? : ¿À¶óÅ¬ÀÌ ¼³Ä¡µÈ ±âº» °æ·Î
+-- 2. HR ê³„ì • ì ‘ì†
+-- 3. ëª…ë ¹ì–´ ì…ë ¥
+-- @[ê²½ë¡œ]\hr_main.sql
+-- @? : ì˜¤ë¼í´ì´ ì„¤ì¹˜ëœ ê¸°ë³¸ ê²½ë¡œ
 -- @?/demo/schema/human_resources/hr_main.sql
--- 4. 123456 ºñ¹Ğ¹øÈ£
+-- 4. 123456 ë¹„ë°€ë²ˆí˜¸
 -- 5. user[tablespace]
 -- 6. temp[temp tablespace]
--- 7. [log °æ·Î] - @?/demo/schema/log
+-- 7. [log ê²½ë¡œ] - @?/demo/schema/log
 
 
--- Å×ÀÌºí EMPLOYEES ÀÇ Å×ÀÌºí ±¸Á¶¸¦ Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ í…Œì´ë¸” êµ¬ì¡°ë¥¼ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 desc employees;
 
--- Å×ÀÌºí EMPLOYEES ¿¡¼­ EMPLOYEE_ID, FIRST_NAME (È¸¿ø¹øÈ£, ÀÌ¸§) ¸¦ Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
--- * »ç¿ø Å×ÀÌºíÀÇ »ç¿ø¹øÈ£¿Í ÀÌ¸§À» Á¶È¸
+-- í…Œì´ë¸” EMPLOYEES ì—ì„œ EMPLOYEE_ID, FIRST_NAME (íšŒì›ë²ˆí˜¸, ì´ë¦„) ë¥¼ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
+-- * ì‚¬ì› í…Œì´ë¸”ì˜ ì‚¬ì›ë²ˆí˜¸ì™€ ì´ë¦„ì„ ì¡°íšŒ
 select employee_id, first_name
 from employees;
 
--- Å×ÀÌºí EMPLOYEES ÀÌ <¿¹½Ã>¿Í °°ÀÌ Ãâ·ÂµÇµµ·Ï Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
--- ¶Ù¾î¾²±â°¡ ¾øÀ¸¸é, µû¿ÈÇ¥ »ı·«°¡´É
--- ex) employee_id »ç¿ø ¹øÈ£(X), employee_id "»ç¿ø ¹øÈ£"(O), employee_id »ç¿ø¹øÈ£(O)
--- AS »ı·Â°¡´É
--- ÇÑ±Û º°ÄªÀ» ºÎ¿©ÇÏ¿© Á¶È¸
-select employee_id as "»ç¿ø ¹øÈ£"
-      ,first_name as ÀÌ¸§
-      ,last_name as ¼º
-      ,email as ÀÌ¸ŞÀÏ
-      ,phone_number as ÀüÈ­¹øÈ£
-      ,hire_date as ÀÔ»çÀÏÀÚ
-      ,salary as ±Ş¿©
+-- í…Œì´ë¸” EMPLOYEES ì´ <ì˜ˆì‹œ>ì™€ ê°™ì´ ì¶œë ¥ë˜ë„ë¡ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
+-- ë›°ì–´ì“°ê¸°ê°€ ì—†ìœ¼ë©´, ë”°ì˜´í‘œ ìƒëµê°€ëŠ¥
+-- ex) employee_id ì‚¬ì› ë²ˆí˜¸(X), employee_id "ì‚¬ì› ë²ˆí˜¸"(O), employee_id ì‚¬ì›ë²ˆí˜¸(O)
+-- AS ìƒë ¥ê°€ëŠ¥
+-- í•œê¸€ ë³„ì¹­ì„ ë¶€ì—¬í•˜ì—¬ ì¡°íšŒ
+select employee_id as "ì‚¬ì› ë²ˆí˜¸"
+      ,first_name as ì´ë¦„
+      ,last_name as ì„±
+      ,email as ì´ë©”ì¼
+      ,phone_number as ì „í™”ë²ˆí˜¸
+      ,hire_date as ì…ì‚¬ì¼ì
+      ,salary as ê¸‰ì—¬
 from employees
 ;
 
 select *
 from employees;
 
--- Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID¸¦ Áßº¹µÈ µ¥ÀÌÅÍ¸¦ Á¦°ÅÇÏ°í Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
--- distinct ÄÃ·³¸í : Áßº¹µÈ µ¥ÀÌÅÍ¸¦ Á¦°ÅÇÏ°í Á¶È¸ÇÏ´Â Å°¿öµå
+-- í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDë¥¼ ì¤‘ë³µëœ ë°ì´í„°ë¥¼ ì œê±°í•˜ê³  ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
+-- distinct ì»¬ëŸ¼ëª… : ì¤‘ë³µëœ ë°ì´í„°ë¥¼ ì œê±°í•˜ê³  ì¡°íšŒí•˜ëŠ” í‚¤ì›Œë“œ
 select distinct job_id, 
 from employees;
 
--- Å×ÀÌºí EMPLOYEES ÀÇ SALARY(±Ş¿©)°¡ 6000À» ÃÊ°úÇÏ´Â »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ SALARY(ê¸‰ì—¬)ê°€ 6000ì„ ì´ˆê³¼í•˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees
 where salary > 6000;
 
--- Å×ÀÌºí EMPLOYEES ÀÇ SALARY(±Ş¿©)°¡ 10000ÀÎ »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ SALARY(ê¸‰ì—¬)ê°€ 10000ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees 
 where salary = 10000;
 
--- Å×ÀÌºí EMPLOYEES ÀÇ ¸ğµç ¼Ó¼ºµéÀ» SALARY ¸¦ ±âÁØÀ¸·Î ³»¸²Â÷¼ø Á¤·ÄÇÏ°í, FIRST_NAME À» ±âÁØÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä
--- ÇÏ¿© Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ ëª¨ë“  ì†ì„±ë“¤ì„ SALARY ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬í•˜ê³ , FIRST_NAME ì„ ê¸°ì¤€ìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
+-- í•˜ì—¬ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select * 
 from employees
 order by salary desc, first_name asc; 
 
--- Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®FI_ACCOUNT¡¯ ÀÌ°Å³ª ¡®IT_PROG¡¯ ÀÎ »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼º
+-- í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜FI_ACCOUNTâ€™ ì´ê±°ë‚˜ â€˜IT_PROGâ€™ ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±
 select *
 from employees 
 where job_id in('FI_ACCOUNT', 'IT_PROG');
 -- where job_id = 'FI_ACCOUNT' or job_id = 'IT_PROG';
 
--- Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®FI_ACCOUNT¡¯ ÀÌ°Å³ª ¡®IT_PROG¡¯ ¾Æ´Ñ »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼º
+-- í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜FI_ACCOUNTâ€™ ì´ê±°ë‚˜ â€˜IT_PROGâ€™ ì•„ë‹Œ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±
 select *
 from employees
 where job_id not in('FI_ACCOUNT', 'IT_PROG');
 
--- Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®IT_PROG¡¯ ÀÌ¸é¼­ SALARY °¡ 6000 ÀÌ»óÀÎ »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼º
+-- í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜IT_PROGâ€™ ì´ë©´ì„œ SALARY ê°€ 6000 ì´ìƒì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±
 select *
 from employees
 where job_id = 'IT_PROG' and salary >= 6000;
 
--- Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ÀÌ ¡®S¡¯·Î ½ÃÀÛÇÏ´Â »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì´ â€˜Sâ€™ë¡œ ì‹œì‘í•˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees 
 where first_name like 'S%';
 
--- Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ÀÌ ¡®s¡¯·Î ³¡³ª´Â »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì´ â€˜sâ€™ë¡œ ëë‚˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees
 where first_name like '%s';
 
--- Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ¿¡ ¡®s¡¯°¡ Æ÷ÇÔµÇ´Â »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì— â€˜sâ€™ê°€ í¬í•¨ë˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees
 where first_name like '%s%';
 
--- Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ÀÌ 5±ÛÀÚÀÎ »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì´ 5ê¸€ìì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees
 where first_name like '_____';
 -- where length(first_name) = 5;
--- length(ÄÃ·³¸í) : ±ÛÀÚ¼ö¸¦ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+-- length(ì»¬ëŸ¼ëª…) : ê¸€ììˆ˜ë¥¼ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 
--- Å×ÀÌºí EMPLOYEES ÀÇ COMMISSION_PCT°¡ NULL ÀÎ »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ COMMISSION_PCTê°€ NULL ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees
 where commission_pct is null;
 
--- Å×ÀÌºí EMPLOYEES ÀÇ COMMISSION_PCT°¡ NULLÀÌ ¾Æ´Ñ »ç¿øÀÇ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ COMMISSION_PCTê°€ NULLì´ ì•„ë‹Œ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees
 where commission_pct is not null;
 
--- Å×ÀÌºí EMPLOYEES ÀÇ »ç¿øÀÇ HIRE_DATE°¡ 04³â ÀÌ»óÀÎ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ ì‚¬ì›ì˜ HIRE_DATEê°€ 04ë…„ ì´ìƒì¸ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees
-where hire_date >= '04/01/01';         -- SQL Developer ¿¡¼­ ¹®ÀÚÇü µ¥ÀÌÅÍ¸¦ ³¯Â¥Çü µ¥ÀÌÅÍ·Î ÀÚµ¿ º¯È¯
+where hire_date >= '04/01/01';         -- SQL Developer ì—ì„œ ë¬¸ìí˜• ë°ì´í„°ë¥¼ ë‚ ì§œí˜• ë°ì´í„°ë¡œ ìë™ ë³€í™˜
 
--- to_date() : ¹®ÀÚÇü µ¥ÀÌÅÍ¸¦ ³¯Â¥Çü µ¥ÀÌÅÍ·Î º¯È¯ÇÏ´Â ÇÔ¼ö
+-- to_date() : ë¬¸ìí˜• ë°ì´í„°ë¥¼ ë‚ ì§œí˜• ë°ì´í„°ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
 select *
 from employees
 where hire_date >= to_date('20040101', 'yyyymmdd');   
 
--- Å×ÀÌºí EMPLOYEES ÀÇ »ç¿øÀÇ HIRE_DATE°¡ 04³âµµºÎÅÍ 05³âµµÀÎ ¸ğµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ ì‚¬ì›ì˜ HIRE_DATEê°€ 04ë…„ë„ë¶€í„° 05ë…„ë„ì¸ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ì‘ì„±í•˜ì‹œì˜¤.
 select *
 from employees
 where hire_date >= '04/01/01' and hire_date <= '05/12/31';
@@ -180,7 +180,7 @@ from employees
 where hire_date >= to_date('20040101', 'yyyymmdd'); 
   and hire_date <= to_date('20051231', 'yyyymmdd'); 
   
--- ÄÃ·³ between A and B; 
+-- ì»¬ëŸ¼ between A and B; 
 select *
 from employees
 where hire_date between to_date('20040101', 'yyyymmdd')
@@ -190,4 +190,4 @@ select *
 from employees
 where hire_date between '04/01/01' and '05/12/31'; 
 
--- 12.45, -12.45 º¸´Ù Å©°Å³ª °°Àº Á¤¼ö Áß Á¦ÀÏ ÀÛÀº ¼ö¸¦ °è»êÇÏ´Â SQL ¹®À» °¢°¢ ÀÛ¼ºÇÏ½Ã¿À.
+   
